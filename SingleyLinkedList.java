@@ -55,7 +55,7 @@ public class SingleyLinkedList {
 	Link cur = head;
 	int count = 0;
 	
-	if(length == 0){
+	if(pos == 0){
 		head = cur.next;
 		length--;
 		return;
@@ -67,6 +67,7 @@ public class SingleyLinkedList {
 			length--;
 			return;
 		}
+		cur = cur.next;
 		count++;
 	}
     }
