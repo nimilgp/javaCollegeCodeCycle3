@@ -15,7 +15,7 @@ public class SingleyLinkedList {
     Link head = null;
     int length = 0;
 
-    void addLinkAt(int data,int pos)
+    void insertLinkAt(int data,int pos)
     {
         Link newLink = new Link(data);
 
@@ -97,27 +97,40 @@ public class SingleyLinkedList {
     public static void main(String[] args)
     {
  
-        SingleyLinkedList L1 = new SingleyLinkedList();
- 
-        L1.addLinkAt(1,0);
-        L1.addLinkAt(2,1);
-        L1.addLinkAt(3,2);
-        L1.addLinkAt(4,1);
- 
-        L1.displayLinks();
- 
-	L1.countLinks();
+        SingleyLinkedList SLL = new SingleyLinkedList();
+ 	Scanner sc = new Scanner(System.in);
+	int ch,data,pos;
 
-	L1.deleteLinkAt(3);
-        L1.displayLinks();
-	L1.deleteLinkAt(1);
-        L1.displayLinks();
-	L1.deleteLinkAt(0);
-        L1.displayLinks();
+	while(true){
+		System.out.print("\n(1)Insert\n(2)Delete\n(3)Display\n(4)Count\n(5)Exit\nchoice: ");
+		ch = sc.nextInt();
 
-	L1.countLinks();
+		if(ch == 1){
+			System.out.print("Enter position: ");
+			pos = sc.nextInt();
+			System.out.print("Enter data: ");
+			data = sc.nextInt();
+			SLL.insertLinkAt(data,pos);
+		}
 
+		if(ch == 2){
+			System.out.print("Enter position: ");
+			pos = sc.nextInt();
+			SLL.deleteLinkAt(pos);
+		}
+		
+		if(ch == 3){
+			SLL.displayLinks();
+		}
+		
+		if(ch == 4){
+			SLL.countLinks();
+		}
 
+		if(ch == 5){
+			return;
+		}
+	}
 
     }
 }
