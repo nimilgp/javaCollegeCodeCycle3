@@ -27,7 +27,8 @@ public class SingleyLinkedList {
 	Link cur = head;
 	int count = 0;
 	
-	if(length == 0){
+	if(pos == 0){
+		newLink.next = head;
 		head = newLink;
 		length++;
 		return;
