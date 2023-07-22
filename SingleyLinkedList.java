@@ -40,6 +40,7 @@ public class SingleyLinkedList {
 			length++;
 			return;
 		}
+		cur = cur.next;
 		count++;
 	}
     }
@@ -105,5 +106,17 @@ public class SingleyLinkedList {
         L1.displayLinks();
  
 	L1.countLinks();
+
+	L1.deleteLinkAt(3);
+        L1.displayLinks();
+	L1.deleteLinkAt(1);
+        L1.displayLinks();
+	L1.deleteLinkAt(0);
+        L1.displayLinks();
+
+	L1.countLinks();
+
+
+
     }
 }
