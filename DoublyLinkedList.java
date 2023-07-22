@@ -1,18 +1,21 @@
 import java.util.*;
 
-public class SingleyLinkedList {
+public class DoublyLinkedList {
     class Link {
         int data;
         Link next;
+	Link prev;
  
         Link(int data)
         {
             this.data = data;
             this.next = null;
+	    this.prev = null;
         }
     }
  
     Link head = null;
+    Link tail = null;
     int length = 0;
 
     void insertLinkAt(int data,int pos)
@@ -97,10 +100,10 @@ public class SingleyLinkedList {
     public static void main(String[] args)
     {
  
-        SingleyLinkedList SLL = new SingleyLinkedList();
+        DoublyLinkedList SLL = new DoublyLinkedList();
  	Scanner sc = new Scanner(System.in);
 	int ch,data,pos;
-
+	/*
 	while(true){
 		System.out.print("\n(1)Insert\n(2)Delete\n(3)Display\n(4)Count\n(5)Exit\nchoice: ");
 		ch = sc.nextInt();
@@ -131,6 +134,7 @@ public class SingleyLinkedList {
 			return;
 		}
 	}
+	*/
 
     }
 }
