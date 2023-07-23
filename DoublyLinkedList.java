@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class DoublyLinkedList {
@@ -28,7 +27,7 @@ public class DoublyLinkedList {
 
 		else{
 			newLink.next = head;
-			head.next.prev = newLink;
+			head.prev = newLink;
 			head = newLink;
 		}
 		length++;
@@ -91,8 +90,10 @@ public class DoublyLinkedList {
 		}
 
 		else{
+			Link newLink = head;
 			head = head.next;
 			head.prev = null;
+			newLink.next = null;
 		}
 		length--;
 	}
@@ -101,12 +102,13 @@ public class DoublyLinkedList {
 		if(head == tail){
 			head = null;
 			tail = null;
-			return;
 		}
 
 		else{
+			Link newLink = tail;
 			tail = tail.prev;
 			tail.next = null;
+			newLink.prev = null;
 		}
 		length--;
 	}
@@ -126,15 +128,18 @@ public class DoublyLinkedList {
 			return;
 		}
 
-		if(pos == length){
+		if(pos == length - 1){
 			deleteLinkAtTail(pos);
 			return;
 		}
 
 		while(cur!=null){
-			if(count == pos -1){
-				cur.next = cur.next.next;
-				cur.next.prev = cur;
+			if(count == pos - 1){
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+				cur.prev.next = cur.next;
+				cur.next.prev = cur.prev;
+				cur.prev = null;
+				cur.next = null;
 				length--;
 				return;
 			}
