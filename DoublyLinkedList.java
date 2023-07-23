@@ -196,16 +196,16 @@ public class DoublyLinkedList {
         	return temp;
     	}
  
-    	Link mergeSort(Link node){
+    	Link mergeSort(Link node,int type){
         	if (node == null || node.next == null) {
             		return node;
         	}
         	Link second = split(node);
  
-		node = mergeSort(node);
-		second = mergeSort(second);
+		node = mergeSort(node,type);
+		second = mergeSort(second,type);
 	 
-		return merge(node, second);
+		return merge(node, second,type);
     	}
 
 	boolean compareIntData(Link first,Link second){
@@ -226,7 +226,7 @@ public class DoublyLinkedList {
 		}
 	}
 
-	Link merge(Link first, Link second){
+	Link merge(Link first, Link second,int type){
 		if (first == null) {
 			return second;
 		}
@@ -235,22 +235,22 @@ public class DoublyLinkedList {
 		    	return first;
 		}
 	 
-		if (first.intData < second.intData) {
-		    	first.next = merge(first.next, second);
+		if ((type == 1)?compareIntData(first,second):compareStrData(first,second)) {
+		    	first.next = merge(first.next, second,type);
 		    	first.next.prev = first;
 		    	first.prev = null;
 		    	return first;
 		}
 		else {
-		    	second.next = merge(first, second.next);
+		    	second.next = merge(first, second.next,type);
 		    	second.next.prev = second;
 		    	second.prev = null;
 		    	return second;
 		}
 	}
 
-	void sort(){
-		head = mergeSort(head);
+	void sort(int type){
+		head = mergeSort(head,type);
 	}
 
 	public static void main(String[] args){
@@ -273,30 +273,45 @@ public class DoublyLinkedList {
 				DLL.insertLinkAt(intData,strData,pos);
 			}
 
-			if(ch == 2){
+			else if(ch == 2){
 				System.out.print("Enter position: ");
 				pos = sc.nextInt();
 				DLL.deleteLinkAt(pos);
 			}
 
-			if(ch == 3){
+			else if(ch == 3){
 				DLL.displayLinksForward();
 			}
 
-			if(ch == 4){
+			else if(ch == 4){
 				DLL.displayLinksBackward();
 			}
 
-			if(ch == 5){
+			else if(ch == 5){
 				DLL.countLinks();
 			}
 
-			if(ch == 6){
-				DLL.sort();
+			else if(ch == 6){
+				System.out.print("Sort by \n(1)Integer Data\n(2)String Data\nchoice: ");
+				ch = sc.nextInt();
+				if(ch == 1){
+					DLL.sort(1);
+				}
+				else if(ch == 2){
+					DLL.sort(2);
+				}
+				else{
+					System.out.print("----invalid input----");
+				}
 			}
 
-			if(ch == 7){
+			else if(ch == 7){
 				return;
+			}
+
+			else{
+				System.out.print("----invalid input----");
+
 			}
 		}
 	}
