@@ -2,13 +2,15 @@ import java.util.*;
 
 public class DoublyLinkedList {
 	class Link {
-		int data;
+		int intData;
+		String strData;
 		Link next;
 		Link prev;
 
-		Link(int data)
+		Link(int intData,String strData)
 		{
-			this.data = data;
+			this.intData = intData;
+			this.strData = strData;
 			this.next = null;
 			this.prev = null;
 		}
@@ -18,8 +20,8 @@ public class DoublyLinkedList {
 	Link tail = null;
 	int length = 0;
 
-	void insertLinkAtHead(int data){
-		Link newLink = new Link(data);
+	void insertLinkAtHead(int intData,String strData){
+		Link newLink = new Link(intData,strData);
 		if (head == null){
 			head = newLink;
 			tail = newLink;
@@ -33,8 +35,8 @@ public class DoublyLinkedList {
 		length++;
 	}
 
-	void insertLinkAtTail(int data){
-		Link newLink = new Link(data);
+	void insertLinkAtTail(int intData,String strData){
+		Link newLink = new Link(intData,strData);
 		if (tail == null){
 			head = newLink;
 			tail = newLink;
@@ -48,26 +50,26 @@ public class DoublyLinkedList {
 		length++;
 	}
 
-	void insertLinkAt(int data,int pos){
+	void insertLinkAt(int intData,String strData,int pos){
 		if(pos<0 || pos>length){
 			System.out.println("#####Cant do that####");
 			return;
 		}
 
 		if(pos == 0){
-			insertLinkAtHead(data);
+			insertLinkAtHead(intData,strData);
 			return;
 		}
 
 		if(pos == length){
-			insertLinkAtTail(data);
+			insertLinkAtTail(intData,strData);
 			return;
 		}
 
 		Link cur = head;
 		int count = 0;
 		
-		Link newLink = new Link(data);
+		Link newLink = new Link(intData,strData);
 
 		while(cur!=null){
 			if(count == pos -1){
@@ -156,7 +158,7 @@ public class DoublyLinkedList {
 		System.out.print("(head)");
 		while (cur != null) {
 
-			System.out.print("<-->" + cur.data );
+			System.out.print("<-->" + "(" + cur.intData + "," + cur.strData + ")" );
 			cur = cur.next;
 		}
 		System.out.print("<-->(tail)\n");
@@ -172,7 +174,7 @@ public class DoublyLinkedList {
 		System.out.print("(tail)");
 		while (cur != null) {
 
-			System.out.print("<-->" + cur.data );
+			System.out.print("<-->" + "(" + cur.intData + "," + cur.strData + ")" );
 			cur = cur.prev;
 		}
 		System.out.print("<-->(head)\n");
@@ -186,7 +188,8 @@ public class DoublyLinkedList {
 	public static void main(String[] args){
 		DoublyLinkedList DLL = new DoublyLinkedList();
 		Scanner sc = new Scanner(System.in);
-		int ch,data,pos;
+		int ch,intData,pos;
+		String strData;
 		
 		while(true){
 			System.out.print("\n(1)Insert\n(2)Delete\n(3)Display Forward\n(4)Display Backward\n(5)Count\n(6)Sort\n(7)Exit\nchoice: ");
@@ -195,9 +198,11 @@ public class DoublyLinkedList {
 			if(ch == 1){
 				System.out.print("Enter position: ");
 				pos = sc.nextInt();
-				System.out.print("Enter data: ");
-				data = sc.nextInt();
-				DLL.insertLinkAt(data,pos);
+				System.out.print("Enter Integer Data: ");
+				intData = sc.nextInt();
+				System.out.print("Enter String Data: ");
+				strData = sc.next();	
+				DLL.insertLinkAt(intData,strData,pos);
 			}
 
 			if(ch == 2){
