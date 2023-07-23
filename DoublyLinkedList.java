@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class DoublyLinkedList {
@@ -82,6 +83,33 @@ public class DoublyLinkedList {
 			count++;
 		}
 	}
+	
+	void deleteLinkAtHead(int pos){
+		if(head == tail){
+			head = null;
+			tail = null;
+		}
+
+		else{
+			head = head.next;
+			head.prev = null;
+		}
+		length--;
+	}
+
+	void deleteLinkAtTail(int pos){
+		if(head == tail){
+			head = null;
+			tail = null;
+			return;
+		}
+
+		else{
+			tail = tail.prev;
+			tail.next = null;
+		}
+		length--;
+	}
 
 	void deleteLinkAt(int pos)
 	{
@@ -94,14 +122,19 @@ public class DoublyLinkedList {
 		int count = 0;
 
 		if(pos == 0){
-			head = cur.next;
-			length--;
+			deleteLinkAtHead(pos);
+			return;
+		}
+
+		if(pos == length){
+			deleteLinkAtTail(pos);
 			return;
 		}
 
 		while(cur!=null){
 			if(count == pos -1){
 				cur.next = cur.next.next;
+				cur.next.prev = cur;
 				length--;
 				return;
 			}
