@@ -46,8 +46,7 @@ public class SingleyLinkedList {
 	}
     }
 
-    void deleteLinkAt(int pos)
-    {
+    void deleteLinkAt(int pos){
 	if(pos<0 || pos>length-1){
 		System.out.println("#####Cant do that####");
 		return;
@@ -73,8 +72,7 @@ public class SingleyLinkedList {
 	}
     }
 
-    void displayLinks()
-    {
+    void displayLinks(){
  
         Link cur = head;
         if (head == null) {
@@ -89,14 +87,12 @@ public class SingleyLinkedList {
         System.out.println();
     }
  
-    void countLinks()
-    {
+    void countLinks(){
         System.out.println("Total Links: "
                            + length);
     }
  
-    public static void main(String[] args)
-    {
+    public static void main(String[] args){
  
         SingleyLinkedList SLL = new SingleyLinkedList();
  	Scanner sc = new Scanner(System.in);
