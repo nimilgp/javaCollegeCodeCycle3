@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class PolynomialSingleyLinkedList {
+class PolynomialSingleyLinkedList {
 	class Link {
 		int coefficient;
 		int exponent;
@@ -16,7 +16,25 @@ public class PolynomialSingleyLinkedList {
 
 	Link head = null;
 	int length = 0;
-
+	
+	PolynomialSingleyLinkedList(){
+		Scanner sc = new Scanner(System.in);
+		int coefficient = 1;
+		int exponent = 1;
+		int num_terms;
+		String expression;
+		System.out.print("Enter number of terms in polynomial: ");
+		num_terms = sc.nextInt();
+		System.out.print("Enter in descending order of powers: \n");
+		for(int i=0;i<num_terms;i++){
+			System.out.print("Enter power of term " + (i+1)+ ": ");
+			exponent = sc.nextInt();
+			System.out.print("Enter coefficient of term: ");
+			coefficient = sc.nextInt();
+			this.insertLinkAt(coefficient,exponent,length);
+		}
+	}
+			
 	void insertLinkAt(int coefficient,int exponent,int pos)
 	{
 		Link newLink = new Link(coefficient,exponent);
@@ -79,13 +97,22 @@ public class PolynomialSingleyLinkedList {
 	{
 
 		Link cur = head;
+		String sign;
 		if (head == null) {
 			System.out.println("Empty");
 			return;
 		}
+		
+		System.out.print("Polynomial: ");
 		while (cur != null) {
+			if(cur.coefficient < 0){
+				sign = "-";
+			}
+			else{
+				sign = "+";
+			}
 
-			System.out.print(cur.coefficient + "x^" + cur.exponent);
+			System.out.print(sign + ((cur.coefficient > 0)?cur.coefficient:-1*cur.coefficient) + "x^" + cur.exponent);
 			cur = cur.next;
 		}
 		System.out.println();
@@ -95,10 +122,12 @@ public class PolynomialSingleyLinkedList {
 	{
 
 		PolynomialSingleyLinkedList polyOne = new PolynomialSingleyLinkedList();
-		PolynomialSingleyLinkedList polyTwo = new PolynomialSingleyLinkedList();
-		PolynomialSingleyLinkedList polyAns = new PolynomialSingleyLinkedList();
+		//PolynomialSingleyLinkedList polyTwo = new PolynomialSingleyLinkedList();
+		//PolynomialSingleyLinkedList polyAns = new PolynomialSingleyLinkedList();
 
 		Scanner sc = new Scanner(System.in);
+
+		polyOne.displayPolynomial();
 
 	}
 }
