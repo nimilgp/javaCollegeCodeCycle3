@@ -2,14 +2,14 @@ import java.util.*;
 
 class PolynomialSingleyLinkedList {
 	class Link {
-		int coefficient;
-		int exponent;
+		int coef;
+		int exp;
 		Link next;
 
-		Link(int coefficient,int exponent)
+		Link(int coef,int exp)
 		{
-			this.coefficient = coefficient;
-			this.exponent = exponent;
+			this.coef = coef;
+			this.exp = exp;
 			this.next = null;
 		}
 	}
@@ -19,8 +19,8 @@ class PolynomialSingleyLinkedList {
 	
 	PolynomialSingleyLinkedList(){
 		Scanner sc = new Scanner(System.in);
-		int coefficient = 1;
-		int exponent = 1;
+		int coef = 1;
+		int exp = 1;
 		int num_terms;
 		String expression;
 		System.out.print("Enter number of terms in polynomial: ");
@@ -28,16 +28,20 @@ class PolynomialSingleyLinkedList {
 		System.out.print("Enter in descending order of powers: \n");
 		for(int i=0;i<num_terms;i++){
 			System.out.print("Enter power of term " + (i+1)+ ": ");
-			exponent = sc.nextInt();
-			System.out.print("Enter coefficient of term: ");
-			coefficient = sc.nextInt();
-			this.insertLinkAt(coefficient,exponent,length);
+			exp = sc.nextInt();
+			System.out.print("Enter coef of term: ");
+			coef = sc.nextInt();
+			this.insertLinkAt(coef,exp,length);
 		}
 	}
+
+	PolynomialSingleyLinkedList(int init){
+		;
+	}
 			
-	void insertLinkAt(int coefficient,int exponent,int pos)
+	void insertLinkAt(int coef,int exp,int pos)
 	{
-		Link newLink = new Link(coefficient,exponent);
+		Link newLink = new Link(coef,exp);
 
 		if(pos<0 || pos>length){
 			System.out.println("#####Cant do that####");
@@ -105,29 +109,62 @@ class PolynomialSingleyLinkedList {
 		
 		System.out.print("Polynomial: ");
 		while (cur != null) {
-			if(cur.coefficient < 0){
+			if(cur.coef < 0){
 				sign = "-";
 			}
 			else{
 				sign = "+";
 			}
 
-			System.out.print(sign + ((cur.coefficient > 0)?cur.coefficient:-1*cur.coefficient) + "x^" + cur.exponent);
+			System.out.print(sign + ((cur.coef > 0)?cur.coef:-1*cur.coef) + "x^" + cur.exp + " ");
 			cur = cur.next;
 		}
 		System.out.println();
 	}
 
-	public static void main(String[] args)
-	{
+	void polynomialAddition(PolynomialSingleyLinkedList poly1,PolynomialSingleyLinkedList poly2){
+		Link cur1 = poly1.head;		
+		Link cur2 = poly2.head;
 
+		while(cur1!=null || cur2!=null){
+			if(cur1 == null){
+				this.insertLinkAt(cur2.coef,cur2.exp,this.length);
+				cur2 = cur2.next;
+			}
+			else if(cur2 == null){
+				this.insertLinkAt(cur1.coef,cur1.exp,this.length);
+				cur1 = cur1.next;
+			}
+			else{
+				if(cur1.coef == cur2.coef){
+					this.insertLinkAt(cur1.coef + cur2.coef,cur1.exp,this.length);
+					cur1 = cur1.next;
+					cur2 = cur2.next;
+				}
+				else if(cur1.coef > cur2.coef){
+					this.insertLinkAt(cur1.coef,cur1.exp,this.length);
+					cur1 = cur1.next;
+				}
+				else if(cur1.coef < cur2.coef){
+					this.insertLinkAt(cur2.coef,cur2.exp,this.length);
+					cur2 = cur2.next;
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args){
+		System.out.print("\nPolynomial One:\n");
 		PolynomialSingleyLinkedList polyOne = new PolynomialSingleyLinkedList();
-		//PolynomialSingleyLinkedList polyTwo = new PolynomialSingleyLinkedList();
-		//PolynomialSingleyLinkedList polyAns = new PolynomialSingleyLinkedList();
-
-		Scanner sc = new Scanner(System.in);
-
 		polyOne.displayPolynomial();
 
+		System.out.print("\nPolynomial Two:\n");
+		PolynomialSingleyLinkedList polyTwo = new PolynomialSingleyLinkedList();
+		polyTwo.displayPolynomial();
+		
+		System.out.print("\nPolynomial Summation:\n");
+		PolynomialSingleyLinkedList polyAns = new PolynomialSingleyLinkedList(0);
+		polyAns.polynomialAddition(polyOne,polyTwo);
+		polyAns.displayPolynomial();
 	}
 }
