@@ -185,6 +185,74 @@ public class DoublyLinkedList {
 				+ length);
 	}
 
+	Link split(Link head){
+		Link fast = head, slow = head;
+		while (fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+        	Link temp = slow.next;
+        	slow.next = null;
+        	return temp;
+    	}
+ 
+    	Link mergeSort(Link node){
+        	if (node == null || node.next == null) {
+            		return node;
+        	}
+        	Link second = split(node);
+ 
+		node = mergeSort(node);
+		second = mergeSort(second);
+	 
+		return merge(node, second);
+    	}
+
+	boolean compareIntData(Link first,Link second){
+		if(first.intData < second.intData){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	boolean compareStrData(Link first,Link second){
+		if(second.strData.compareTo(first.strData)>0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	Link merge(Link first, Link second){
+		if (first == null) {
+			return second;
+		}
+	 
+		if (second == null) {
+		    	return first;
+		}
+	 
+		if (first.intData < second.intData) {
+		    	first.next = merge(first.next, second);
+		    	first.next.prev = first;
+		    	first.prev = null;
+		    	return first;
+		}
+		else {
+		    	second.next = merge(first, second.next);
+		    	second.next.prev = second;
+		    	second.prev = null;
+		    	return second;
+		}
+	}
+
+	void sort(){
+		head = mergeSort(head);
+	}
+
 	public static void main(String[] args){
 		DoublyLinkedList DLL = new DoublyLinkedList();
 		Scanner sc = new Scanner(System.in);
@@ -221,6 +289,10 @@ public class DoublyLinkedList {
 
 			if(ch == 5){
 				DLL.countLinks();
+			}
+
+			if(ch == 6){
+				DLL.sort();
 			}
 
 			if(ch == 7){
