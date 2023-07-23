@@ -113,8 +113,7 @@ public class DoublyLinkedList {
 		length--;
 	}
 
-	void deleteLinkAt(int pos)
-	{
+	void deleteLinkAt(int pos){
 		if(pos<0 || pos>length-1){
 			System.out.println("#####Cant do that####");
 			return;
@@ -135,7 +134,6 @@ public class DoublyLinkedList {
 
 		while(cur!=null){
 			if(count == pos - 1){
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
 				cur.prev.next = cur.next;
 				cur.next.prev = cur.prev;
 				cur.prev = null;
@@ -148,66 +146,81 @@ public class DoublyLinkedList {
 		}
 	}
 
-	void displayLinks()
-	{
+	void displayLinksForward(){
 
 		Link cur = head;
 		if (head == null) {
 			System.out.println("Empty");
 			return;
 		}
+		System.out.print("(head)");
 		while (cur != null) {
 
 			System.out.print("<-->" + cur.data );
 			cur = cur.next;
 		}
-		System.out.print("<-->\n");
+		System.out.print("<-->(tail)\n");
 	}
 
-	void countLinks()
-	{
+	void displayLinksBackward(){
+
+		Link cur = tail;
+		if (head == null) {
+			System.out.println("Empty");
+			return;
+		}
+		System.out.print("(tail)");
+		while (cur != null) {
+
+			System.out.print("<-->" + cur.data );
+			cur = cur.prev;
+		}
+		System.out.print("<-->(head)\n");
+	}
+
+	void countLinks(){
 		System.out.println("Total Links: "
 				+ length);
 	}
 
-	public static void main(String[] args)
-	{
-
-		DoublyLinkedList SLL = new DoublyLinkedList();
+	public static void main(String[] args){
+		DoublyLinkedList DLL = new DoublyLinkedList();
 		Scanner sc = new Scanner(System.in);
 		int ch,data,pos;
 		
-		   while(true){
-		   System.out.print("\n(1)Insert\n(2)Delete\n(3)Display\n(4)Count\n(5)Exit\nchoice: ");
-		   ch = sc.nextInt();
+		while(true){
+			System.out.print("\n(1)Insert\n(2)Delete\n(3)Display Forward\n(4)Display Backward\n(5)Count\n(6)Sort\n(7)Exit\nchoice: ");
+			ch = sc.nextInt();
 
-		   if(ch == 1){
-		   System.out.print("Enter position: ");
-		   pos = sc.nextInt();
-		   System.out.print("Enter data: ");
-		   data = sc.nextInt();
-		   SLL.insertLinkAt(data,pos);
-		   }
+			if(ch == 1){
+				System.out.print("Enter position: ");
+				pos = sc.nextInt();
+				System.out.print("Enter data: ");
+				data = sc.nextInt();
+				DLL.insertLinkAt(data,pos);
+			}
 
-		   if(ch == 2){
-		   System.out.print("Enter position: ");
-		   pos = sc.nextInt();
-		   SLL.deleteLinkAt(pos);
-		   }
+			if(ch == 2){
+				System.out.print("Enter position: ");
+				pos = sc.nextInt();
+				DLL.deleteLinkAt(pos);
+			}
 
-		   if(ch == 3){
-		   SLL.displayLinks();
-		   }
+			if(ch == 3){
+				DLL.displayLinksForward();
+			}
 
-		   if(ch == 4){
-		   SLL.countLinks();
-		   }
+			if(ch == 4){
+				DLL.displayLinksBackward();
+			}
 
-		   if(ch == 5){
-		   return;
-		   }
-		   }
-		   
+			if(ch == 5){
+				DLL.countLinks();
+			}
 
+			if(ch == 7){
+				return;
+			}
+		}
 	}
 }
